@@ -138,25 +138,21 @@ var fight = function(enemy) {
 var shop = function() {
   // ask player what they'd like to do
   var shopOptionPrompt = window.prompt(
-    'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one "REFILL", "UPGRADE", or "LEAVE" to make a choice.'
+    'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE.'
   );
 
   // use switch case to carry out action
+  shopOptionPrompt = parseInt(shopOptionPrompt);
   switch (shopOptionPrompt) {
-    case 'refill':
-    case 'REFILL':
+    case 1:
+      playerInfo.refillHealth();
       window.alert("Refilling player's health by 20 for 7 dollars.");
-      playerInfo.health += 20;
-      playerInfo.money -= 7;
       break;
-    case 'upgrade':
-    case 'UPGRADE':
+    case 2:
       window.alert("Upgrading player's attack by 6 for 7 dollars.");
-      playerInfo.attack += 6;
-      playerInfo.money -= 7;
+      playerInfo.upgradeAttack();
       break;
-    case 'leave':
-    case 'LEAVE':
+    case 3:
       window.alert('Leaving the store.');
       break;
     default:
@@ -177,7 +173,7 @@ var getPlayerName = function() {
     name = window.prompt("What is your robot's name?");
   }
 
-  console.log('Your robot\'s name is' + name);
+  console.log('Your robot\'s name is ' + name);
   return name;
 };
 
@@ -189,7 +185,7 @@ var playerInfo = {
   reset: function() {
     this.health = 100;
     this.moeny = 10;
-    this.attack = 10;
+    this.attack = 100;//change back to 10!
   },
   refillHealth: function() {
     this.health += 20;
